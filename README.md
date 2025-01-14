@@ -10,10 +10,10 @@ This is a **Book Management App** developed using **React Native**. The applicat
   <img src="./assets/screenshots/SignUp.PNG" alt="Sign Up Page" width="45%">
 </p>
 
-### Book Detail Page & Book List Page
+### Book List Page & Book Detail Page
 <p align="center">
-  <img src="./assets/screenshots/BookDetail.PNG" alt="Book Detail Page" width="45%">
   <img src="./assets/screenshots/BookList.PNG" alt="Book List Page" width="45%">
+  <img src="./assets/screenshots/BookDetail.PNG" alt="Book Detail Page" width="45%">
 </p>
 
 ### Admin Page & Add Book Page 
