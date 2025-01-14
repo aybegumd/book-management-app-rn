@@ -14,21 +14,21 @@ This is a **Book Management App** developed using **React Native**. The applicat
 ## Screenshots
 
 ### Home Page
-![Home Page](./assets/screenshots/HomePage.png)
+![Home Page](./assets/screenshots/HomePage.PNG)
 
 ### Sign Up Page
-![Sign Up](./assets/screenshots/SignUp.png)
+![Sign Up](./assets/screenshots/SignUp.PNG)
 
 ### Add Book Page
-![Add Book](./assets/screenshots/AddBook.png)
+![Add Book](./assets/screenshots/AddBook.PNG)
 
 ### Admin Page
-![Admin Page](./assets/screenshots/AdminPage.png)
+![Admin Page](./assets/screenshots/AdminPage.PNG)
 
 ### Book Detail Page
-![Book Detail](./assets/screenshots/BookDetail.png)
+![Book Detail](./assets/screenshots/BookDetail.PNG)
 
 ### Book List Page
-![Book List](./assets/screenshots/BookList.png)
+![Book List](./assets/screenshots/BookList.PNG)
 
 
