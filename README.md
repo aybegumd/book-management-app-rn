@@ -6,8 +6,8 @@ This is a **Book Management App** developed using **React Native**. The applicat
 
 ### Home Page & Sign Up Page
 <p align="center">
-  <img src="./assets/screenshots/HomePage.PNG" alt="Home Page" width="45%">
   <img src="./assets/screenshots/SignUp.PNG" alt="Sign Up Page" width="45%">
+  <img src="./assets/screenshots/HomePage.PNG" alt="Home Page" width="45%">
 </p>
 
 ### Book List Page & Book Detail Page
