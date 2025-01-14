@@ -33,16 +33,16 @@ const HomePage = ({ navigation }) => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        const firstName = docSnap.data().firstName; // Kullanıcı adını al
+        const firstName = docSnap.data().firstName; 
 
-        // BookList sayfasına yönlendirirken firstName'i ilet
+       
         navigation.navigate('BookList', { firstName });
       } else {
         console.log('No such document!');
       }
     } catch (error) {
       console.error(error);
-      Alert.alert('Giriş Hatası', 'Kullanıcı adı veya şifre hatalı. Lütfen tekrar deneyin.');
+      Alert.alert('Login Error', 'The username or password is incorrect. Please try again.');
     }
   };
 
@@ -53,7 +53,7 @@ const HomePage = ({ navigation }) => {
     if (email === adminUsername && password === adminPassword) {
       navigation.navigate('AdminPage');
     } else {
-      Alert.alert('Admin Giriş Hatası', 'Admin kullanıcı adı veya şifre hatalı. Lütfen tekrar deneyin.');
+      Alert.alert('Admin Login Error', 'Admin username or password is incorrect. Please try again.');
     }
   };
 

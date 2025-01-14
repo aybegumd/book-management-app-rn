@@ -1,10 +1,9 @@
-//API Güncelle
-
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image, Alert } from 'react-native';
 import { fetchBooks } from '../api';
 import axios from 'axios'; 
 import searchIcon from '../assets/search.png';
+
 
 const AdminPage = ({ navigation }) => {
   const [books, setBooks] = useState([]);
@@ -40,7 +39,7 @@ const AdminPage = ({ navigation }) => {
         const data = await fetchBooks();
         setBooks(data);
       } catch (err) {
-        setError("Kitapları yüklerken bir hata oluştu.");
+        setError("An error occurred while loading books.");
       } finally {
         setLoading(false);
       }
@@ -53,7 +52,7 @@ const AdminPage = ({ navigation }) => {
     const newAvailability = !currentAvailability;
 
     try {
-      await axios.patch(`http://192.168.1.58:8080/api/books/${bookId}/availability`, { //API GÜNCELLE
+      await axios.patch(`http://192.168.1.52:8080/api/books/${bookId}/availability`, {
         available: newAvailability,
       });
        
@@ -62,8 +61,31 @@ const AdminPage = ({ navigation }) => {
       );
       setBooks(updatedBooks);
     } catch (error) {
-      console.error("Kitap durumunu değiştirirken hata oluştu:", error.message);
+      console.error("Error while changing book status:", error.message);
     }
+  };
+
+  const deleteBook = async (bookId) => {
+    try {
+      await axios.delete(`http://192.168.1.52:8080/api/books/${bookId}`);
+      const updatedBooks = books.filter(book => book.id !== bookId);
+      setBooks(updatedBooks);
+      Alert.alert("Success", "The book was deleted successfully.");
+    } catch (error) {
+      console.error("An error occurred while deleting the book:", error.message);
+      Alert.alert("Error", "An error occurred while deleting the book.");
+    }
+  };
+
+  const confirmDelete = (bookId) => {
+    Alert.alert(
+      "Delete Book",
+      "Are you sure you want to delete this book?",
+      [
+        { text: "Hayır", style: "cancel" },
+        { text: "Evet", onPress: () => deleteBook(bookId) }
+      ]
+    );
   };
 
   const filteredBooks = books.filter(book => {
@@ -94,12 +116,12 @@ const AdminPage = ({ navigation }) => {
 
   const handleSearchChange = (text) => {
     setSearchTerm(text);
-    setCurrentPage(0); // Sayfayı sıfırla
+    setCurrentPage(0); 
   };
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    setCurrentPage(0); // Sayfayı sıfırla
+    setCurrentPage(0); 
   };
 
   if (loading) {
@@ -129,7 +151,7 @@ const AdminPage = ({ navigation }) => {
               style={styles.searchInput}
               placeholder="Search books by title, author, or category..."
               value={searchTerm}
-              onChangeText={handleSearchChange} // Arama fonksiyonu
+              onChangeText={handleSearchChange} 
             />
             <Image source={searchIcon} style={styles.searchIcon} />
           </View>
@@ -139,7 +161,7 @@ const AdminPage = ({ navigation }) => {
               <TouchableOpacity
                 key={category.name}
                 style={[styles.categoryButton, selectedCategory === category.name && styles.selectedCategoryButton]}
-                onPress={() => handleCategoryChange(category.name)} // Kategori fonksiyonu
+                onPress={() => handleCategoryChange(category.name)}
               >
                 <Text style={[styles.categoryButtonText, selectedCategory === category.name && styles.selectedCategoryButtonText]}>
                   {category.name}
@@ -176,6 +198,12 @@ const AdminPage = ({ navigation }) => {
                   <Text style={styles.toggleButtonText}>
                     {item.available ? 'Mark as Unavailable' : 'Mark as Available'}
                   </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.deleteButton}
+                  onPress={() => confirmDelete(item.id)}
+                >
+                  <Text style={styles.deleteButtonText}>Delete</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -322,6 +350,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#DC3545',
   },
   toggleButtonText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+  },
+  deleteButton: {
+    marginTop: 10,
+    padding: 5,
+    borderRadius: 20,
+    backgroundColor: '#cac7c6',
+    width: '100%',
+    alignItems: 'center',
+  },
+  deleteButtonText: {
     color: '#FFF',
     fontWeight: 'bold',
   },

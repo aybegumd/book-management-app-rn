@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://192.168.1.58:8080/api';  //API GÜNCELLE
+const API_URL = 'http://192.168.1.52:8080/api';  //API GÜNCELLE
 
 
 // Kitapları getiren fonksiyon
@@ -39,7 +39,7 @@ export const addBook = async (book) => {
 
 export const fetchCategories = async () => {
   try {
-    const response = await fetch('http://192.168.1.58:8080/api/categories'); //API GÜNCELLE
+    const response = await fetch('http://192.168.1.52:8080/api'); //API GÜNCELLE
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

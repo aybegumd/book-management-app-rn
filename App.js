@@ -9,7 +9,7 @@ import AdminPage from './screens/AdminPage';
 import UserProfile from './screens/UserProfile'; 
 import ChangePassword from './screens/ChangePassword'; 
 import AddBook from './screens/AddBook'; 
-import FavoriteBooks from './screens/FavoriteBooks'; // Favori Kitaplar Sayfasını ekliyoruz
+import FavoriteBooks from './screens/FavoriteBooks';
 
 import './firebase'; 
 
@@ -62,7 +62,7 @@ const App = () => {
         <Stack.Screen 
           name="FavoriteBooks" 
           component={FavoriteBooks} 
-          options={{ title: 'Favorite Books' }} // Favori Kitaplar Sayfası için başlık
+          options={{ title: 'Favorite Books' }} 
         />
       </Stack.Navigator>
     </NavigationContainer>

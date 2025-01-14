@@ -160,14 +160,14 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: '50%', // Üst kısım için tam alan
+    height: '50%', 
     resizeMode: 'cover',
     position: 'absolute',
     top: 0,
   },
   scrollViewContent: {
     flexGrow: 1, 
-    justifyContent: 'flex-end', // Formun resim altına yerleştirilmesini sağlıyor
+    justifyContent: 'flex-end', 
   },
   formContainer: {
     backgroundColor: '#ffffff',
@@ -175,21 +175,21 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     elevation: 5,
     padding: 20,
-    marginTop: '60%', // Resmin altında olacak şekilde yerleştiriyoruz
+    marginTop: '60%', 
   },
   title: {
-    fontSize: 24,  // Büyük ve belirgin bir yazı
+    fontSize: 24,  
     fontWeight: 'bold',
-    color: '#333', // Koyu renk
+    color: '#333', 
     textAlign: 'center',
-    marginBottom: 20, // Altında boşluk bırakmak için
+    marginBottom: 20, 
   },
   inputContainer: {
     marginBottom: 15,
   },
   label: {
     fontSize: 12,
-    color: '#B0B0B0', // Hafif gri bir renk
+    color: '#B0B0B0', 
     marginBottom: 5,
   },
   input: {
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderRadius: 50,
     alignSelf: 'center', 
-    width: '50%', // Buton genişliği
+    width: '50%', 
   },
   buttonText: {
     color: '#fff',

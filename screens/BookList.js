@@ -4,10 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetchBooks } from '../api'; 
 import profileImage from '../assets/profile.png'; 
 import searchIcon from '../assets/search.png'; 
-import Icon from 'react-native-vector-icons/FontAwesome'; // İkon kütüphanesi
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const BookList = ({ route, navigation }) => {
-  const { firstName } = route.params;
+  const { firstName, email } = route.params;
   const [books, setBooks] = useState([]);
   const [favoriteBooks, setFavoriteBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,30 +51,31 @@ const BookList = ({ route, navigation }) => {
 
     const loadFavorites = async () => {
       try {
-        const favorites = await AsyncStorage.getItem('favoriteBooks');
+        const favorites = await AsyncStorage.getItem(`favoriteBooks_${email}`);
         if (favorites) {
           setFavoriteBooks(JSON.parse(favorites));
+        } else {
+          setFavoriteBooks([]); 
         }
       } catch (error) {
         console.error("Favori kitapları yüklerken bir hata oluştu: ", error);
+        setFavoriteBooks([]); 
       }
     };
-
+  
     loadBooks();
     loadFavorites();
-  }, []);
+  }, [email]); 
 
   const toggleFavorite = async (bookId) => {
     let updatedFavorites;
     if (favoriteBooks.includes(bookId)) {
-      // Favorilerden kaldır
       updatedFavorites = favoriteBooks.filter(id => id !== bookId);
     } else {
-      // Favorilere ekle
       updatedFavorites = [...favoriteBooks, bookId];
     }
     setFavoriteBooks(updatedFavorites);
-    await AsyncStorage.setItem('favoriteBooks', JSON.stringify(updatedFavorites));
+    await AsyncStorage.setItem(`favoriteBooks_${email}`, JSON.stringify(updatedFavorites));
   };
 
   const filteredBooks = books.filter(book => {
@@ -124,13 +125,13 @@ const BookList = ({ route, navigation }) => {
           <Text style={styles.subText}>Let's Discover Books...</Text>
         </View>
         <View style={styles.favoriteHeader}>
-          <Text style={styles.favoriteHeaderText}>Favoriler</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('FavoriteBooks')} style={styles.favoriteIconContainer}>
-            <Icon 
-              name="heart" 
-              size={35} 
-              color="#B68FB2" 
-            />
+        <Text style={styles.favoriteHeaderText}>Favorites</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('FavoriteBooks', { email })} style={styles.favoriteIconContainer}>
+          <Icon 
+            name="heart" 
+            size={35} 
+            color="#B68FB2" 
+          />
           </TouchableOpacity>
         </View>
       </View>
@@ -144,7 +145,7 @@ const BookList = ({ route, navigation }) => {
               value={searchTerm}
               onChangeText={(text) => {
                 setSearchTerm(text);
-                setCurrentPage(0); // Reset page on search
+                setCurrentPage(0); 
               }} 
             />
             <Image source={searchIcon} style={styles.searchIcon} />
@@ -157,7 +158,7 @@ const BookList = ({ route, navigation }) => {
                 style={[styles.categoryButton, selectedCategory === category.name && styles.selectedCategoryButton]} 
                 onPress={() => {
                   setSelectedCategory(category.name);
-                  setCurrentPage(0); // Reset page on category change
+                  setCurrentPage(0); 
                 }}
               >
                 <Text style={[styles.categoryButtonText, selectedCategory === category.name && styles.selectedCategoryButtonText]}>
@@ -314,7 +315,7 @@ const styles = StyleSheet.create({
   },
   favoriteIcon: {
     marginTop: 5,
-    alignSelf: 'flex-end', // Favori ikonunu sağ tarafa yerleştiriyoruz.
+    alignSelf: 'flex-end',
   },
   pagination: {
     flexDirection: 'row',

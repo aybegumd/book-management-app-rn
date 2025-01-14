@@ -46,7 +46,7 @@ const BookDetail = ({ route }) => {
                 <ImageBackground 
                     source={{ uri: book.coverImage }} 
                     style={styles.coverImageBackground} 
-                    imageStyle={styles.bulkyCoverImage} // Bulanık arka plan için 
+                    imageStyle={styles.bulkyCoverImage} 
                 >
                     {/* net kapak resmi */}
                     <Image source={{ uri: book.coverImage }} style={styles.coverImage} />
