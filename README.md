@@ -1,6 +1,7 @@
 # Book Management App - React Native
 
-This is a **Book Management App** developed using **React Native**. The application allows users to manage a collection of books by adding, viewing, and updating information about the books. It also supports features like uploading a book cover image and navigating through different pages.
+This is a **Book Management App** developed using **React Native**. The application allows users to log in with their membership credentials to view books in a list format, perform searches, sort books by categories, view detailed information about each book, and check their availability status. 
+Admin users can log in using a special password to perform management tasks such as adding new books, deleting existing ones, and updating the availability status of books.
 
 ## Screenshots
 
